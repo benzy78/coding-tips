@@ -197,6 +197,35 @@ JQuery＞Node.js＞JavaScript（ES6）＞脱JQuery＞Vue.js/React.js＞Nuxt.js/N
 }
 ```
 
+## githubフロー(Github ver)
+1. 自分のブランチを作成
+2. ファイルの変更
+3. `git add .`する
+4. `git commit -v`
+5. gitプッシュ　`git push origin` 作業用ブランチ (ここまでがローカルの作業ブランチ内での作業。次がGithubでの作業)
+6. Githubの＜code＞の画面でbranchを自分の作業用ブランチに切り替える
+7. New pull requestを押す
+8. メッセージを書く **compareを作業用ブランチになっているか確認**
+9. 緑のCreate Pull requestボタンを押す
+10. Merge pull request を押す（１０、１１は共同開発なら誰か他の人がやる）
+11. Confirm mergeを押す（プルリクが終了）
+12. ローカルで自分のブランチをmasterにして、リモートの内容をローカルにpullする。`git pull origin master`
+13. ローカルのブランチを作業用ブランチに切り替え、masterの内容を開発ブランチにmergeする。`git merge master`
+
+## githubフロー（Bitbucket ver）
+1. 自分のブランチを作成
+2. ファイルの変更
+3. git addする
+4. git commit -v
+5. gitプッシュ　git push origin 作業用ブランチ (ここまでがローカルの作業ブランチ内での作業。次がbitbucketでの作業)
+6. bitbucketのブランチの画面でプルリクしたいbranchを選択し、プルリクエストの作成を押す（これでプルリクは完成）
+7. メッセージを書いて、レビューを待つ。
+8. マージを押す(8,9は基本自分ではやらない)
+9. 遷移後にさらにマージを押す（プルリクが終了）
+10. ローカルで自分のブランチをmasterにして、リモートの内容をローカルにpullする。`git pull origin master`
+11. ローカルのブランチを作業用ブランチに切り替え、masterの内容を開発ブランチにmergeする。`git merge master(develop)`
+
+
 ##コーディングの小技
 
 * place-holderの色を変えるには擬似要素を使う。なお、place-holderはIE９以下では非対応。
