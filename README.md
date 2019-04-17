@@ -96,7 +96,8 @@ innerでmax-widthを指定して、Widthの％でいじるとどの画面幅で�
 
 ## hover時の下線引くアニメーション
 aタグに対して
-```&::after{
+```
+            &::after{
                         margin: 6px auto 0;
                         border-bottom: 1px solid #7c5119;
                         content:'';
@@ -226,7 +227,7 @@ JQuery＞Node.js＞JavaScript（ES6）＞脱JQuery＞Vue.js/React.js＞Nuxt.js/N
 11. ローカルのブランチを作業用ブランチに切り替え、masterの内容を開発ブランチにmergeする。`git merge master(develop)`
 
 
-##コーディングの小技
+## コーディングの小技
 
 * place-holderの色を変えるには擬似要素を使う。なお、place-holderはIE９以下では非対応。
 * headerの右側にナビゲーションを置くには、float:right;
