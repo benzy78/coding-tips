@@ -171,12 +171,36 @@ JQuery＞Node.js＞JavaScript（ES6）＞脱JQuery＞Vue.js/React.js＞Nuxt.js/N
         top: 50%;
         right: 10px;
         margin-top: -2.5px;
-        border-top: 1px solid #ccc;
-        border-right: 1px solid #ccc;
+        border-top: 1px solid #333;
+        border-right: 1px solid #333;
         transform: rotate(45deg);
     }
 }
 ```
+
+なお、Selectboxであれば、まずはselectの親をdivでくくり、そのdivに擬似要素でアローボタンを作り、position relativeにしてz-indexを5にする。（z-indexの値はselectboxより小さければどうでもいい）
+
+そして、selectボックスの背景をtransparentにして、position relativeしてz-index10にする。（親のdivよりz-indexの値が高ければなんぼでもいい）
+
+## ラジオボタンのコーディング
+
+* 選択肢のグループにはname属性を指定
+* 送信する値はvalue属性で指定
+* labelのforの中身を、input[radio]のid属性で指定すると押しやすくなり、ユーザービリティが向上する
+* とりあえず困ったら[ハニワマンさんの記事](https://haniwaman.com/form-css/#i-3)で確認しろ
+
+## 下方向にだけbox-shadowをつけたい時
+
+左右の影を消すために、4番目の指定（広がり値）をぼかしの値と同じだけ負の値で指定（縮小）すると消える。
+
+この時、下方向の影の長さを負の値で指定した分だけ足さないと上と同じ影の長さにはならない。
+```
+.box-shadow {
+  box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.2);
+}
+```
+[参考サイト](http://chroma.hatenablog.com/entry/2013/09/25/172809)
+
 
 ## CSSを使った改行
 ```
@@ -197,6 +221,92 @@ JQuery＞Node.js＞JavaScript（ES6）＞脱JQuery＞Vue.js/React.js＞Nuxt.js/N
     }
 }
 ```
+
+## JS/jQuery関係
+
+### JSやjQueryが動かない時に考えるべきこと
+検証ツールでコンソールエラーを確認する。
+
+### アコーディオン作り方とマークアップ
+html
+```
+<li class="qanda__content">
+  <dl class="qanda__content__in">
+    <dt class="qanda__content__question">
+      <span class="qanda__content__question__icon">Q</span>
+        <span class="qanda__content__question__body">質問</span>
+        <span class="qanda__content__question__btn">＋</span>
+    </dt>
+    <dd class="qanda__content__answer">
+      <p class="qanda__content__answer-in">回答</p>
+      </dd>
+  </dl>
+</li>
+```
+
+JQuery
+```
+$('.qanda__content').click(function(){
+    var $answer=$(this).find('.qanda__content__answer');
+    if($answer.hasClass('open')){
+      $answer.removeClass('open');
+      $(this).find('.qanda__content__question__btn').text("＋");
+      $answer.slideUp();
+    }else{
+      $answer.addClass('open');
+      $(this).find('.qanda__content__question__btn').text("ー");
+      $answer.slideDown();
+    }
+  });
+```
+
+### スムーススクロールのコード
+
+```
+$(function(){
+	$('.header-list a').click(function(){
+		var id = $(this).attr('href');
+		var position = $(id).offset().top;
+		$('html,body').animate({
+		  'scrollTop':position
+		},'slow');
+	  });
+});
+```
+
+### フローティングアクションボタン
+
+```
+jQuery(window).on("scroll", function($) {
+	if (jQuery(this).scrollTop() > 100) {
+	  jQuery('.btn-floating').show();
+	} else {
+	  jQuery('.btn-floating').hide();
+	}
+  });
+
+  jQuery('.btn-floating').click(function () {
+	jQuery('body,html').animate({
+	  scrollTop: 0
+	}, 500);
+	return false;
+  });
+```
+
+### swiperの使い方
+まず、function()いらない
+
+```
+$(function()){
+
+  }
+```
+これはHTMLの読み込みが終了してからjQueryの操作を開始するようにするコードね
+
+swiperの使い方は下記の記事が一番わかりやすい
+
+[swiper使い方記事](https://digipress.info/tech/introducing-swiper-js/)
+
 
 ## githubフロー(Github ver)
 1. 自分のブランチを作成
