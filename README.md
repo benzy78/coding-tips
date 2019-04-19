@@ -222,6 +222,184 @@ JQuery＞Node.js＞JavaScript（ES6）＞脱JQuery＞Vue.js/React.js＞Nuxt.js/N
 }
 ```
 
+## CSSで作るハンバーガーメニュー（サルワカの応用版）
+違和感なく右側からスライドしてくるハンバーガーメニュの作り方
+参考記事[CSSだけで簡単！ハンバーガーメニューの作り方（スマホ対応）:サルワカ](https://saruwakakun.com/html-css/reference/nav-drawer)
+
+HTML
+```
+<nav class="header__nav" id="header__nav__drawer">
+  <input type="checkbox" id="header__nav__input" class="header__nav__unshow">
+  <label for="header__nav__input" id="header__nav__open"><span></span></label>
+  <label for="header__nav__input" class="header__nav__unshow" id="header__nav__close"></label>
+  <ul class="header__list" id="header__nav__content">
+    <li><a href="#news">News</a></li>
+    <li><a href="#service">Service</a></li>
+    <li><a href="#result">Result</a></li>
+    <li><a href="#price">Price</a></li>
+    <li><a href="#comments">comments</a></li>
+    <li><a href="#qanda">FAQs</a></li>
+    <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+```
+
+CSS
+```
+@include sp {
+
+	#header__nav__drawer {
+        position: absolute;
+        top: 0;
+        right: 12px;
+        padding-top: 18px;
+
+		.header__nav__unshow {
+			display: none;
+		}
+
+		#header__nav__open {
+			display: inline-block;
+			width: 30px;
+			height: 22px;
+			vertical-align: middle;
+
+		}
+
+		#header__nav__open span,
+		#header__nav__open span:before,
+		#header__nav__open span:after {
+			position: absolute;
+			height: 4px;
+			width: 26px;
+			border-radius: 20px;
+			background-color: $MainColor;
+			display: block;
+			content: '';
+			cursor: pointer;
+		}
+
+		#header__nav__open span {
+			&::before {
+				bottom: -10px;
+			}
+
+			&::after {
+				bottom: -20px;
+			}
+		}
+
+		#header__nav__close {
+			display: none;
+			position: fixed;
+			z-index: 99;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: $MainColor;
+			opacity: 0;
+			transition: 0.5s ease-in-out;
+
+			&::before {
+				position: absolute;
+				content:"";
+				top: 40px;
+				left: 35px;
+                background-color: $SubColor;
+                border-radius: 20px;
+				display: block;
+				width: 30px;
+				height: 5px;
+				transform: rotate(45deg);
+				transition: 0.5s ease-in-out;
+			}
+
+			&::after {
+				position: absolute;
+				content:"";
+				top:40px;
+				left: 35px;
+                background-color: $SubColor;
+                border-radius: 20px;
+				display: block;
+				width: 30px;
+				height: 5px;
+				transform: rotate(-45deg);
+				transition: 0.5s ease-in-out;
+			}
+		}
+
+		#header__nav__content {
+            padding-top: 197px;
+			overflow: auto;
+			position: fixed;
+			top: 0;
+			right: 0;
+			z-index: 9999;
+			width: 80%;
+			max-width: 300px;
+			height: 100%;
+			background: $SubColor;
+			transition: 0.3s ease-in-out;
+			transform: translateX(150%);
+
+			li {
+                margin-right: 0;
+                margin-bottom: 20px;
+                display: block;
+				float: none;
+
+				a {
+					position: relative;
+                    display: block;
+                    text-align: center;
+				}
+			}
+		}
+
+		#header__nav__input:checked~#header__nav__close {
+			display: block;
+			opacity: 0.7;
+		}
+
+		#header__nav__input:checked~#header__nav__content {
+			transform: translateX(0%);
+			box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+		}
+	}
+}
+```
+
+## background-positionの値について
+background-position:「横方向の位置」「縦方向の位置」;
+
+## ピラミッドみたいなやつのコーディング方法
+　ー  
+ー　ー
+↑こんな感じのやつ
+1. 親要素に`text-align: center;`
+2. 「ー」に`display:inline-block`
+3. 「ー」に`width: 49%;`
+
+## レスポンシブコーディングのコツ
+.innerで
+```
+.inner{
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+}
+```
+の場合、Blockにpaddingを１６〜３２くらい入れとかないと画面縮めた時に余白がなくて変になる。
+もしくは、max-widthも相対値でとるか。
+
+## MacでIEのチェック方法
+1. グーグルドライブで確認したいファイルを送る
+2. 
+3.
+4.
+
 ## JS/jQuery関係
 
 ### JSやjQueryが動かない時に考えるべきこと
